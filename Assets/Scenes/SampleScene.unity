@@ -371,6 +371,7 @@ GameObject:
   - component: {fileID: 855038250}
   - component: {fileID: 855038249}
   - component: {fileID: 855038251}
+  - component: {fileID: 855038252}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -391,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameFeelSequence: {fileID: 855038250}
+  _OnTap: {fileID: 0}
 --- !u!4 &855038248
 Transform:
   m_ObjectHideFlags: 0
@@ -611,6 +613,34 @@ MonoBehaviour:
   SwipeMode: 2
   SwipeThresholdSeconds: 0
   Image: {fileID: 0}
+--- !u!114 &855038252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855038246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c5b6f00f53e4945ba431bdf60f92c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _easyEvent: {fileID: 11400000, guid: 5ba7d23d0e02ec644b318ceda1d4f990, type: 2}
+  _easyEventCallback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 855038247}
+        m_TargetAssemblyTypeName: EventListener, Assembly-CSharp
+        m_MethodName: PrintTest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1099462166
 GameObject:
   m_ObjectHideFlags: 0

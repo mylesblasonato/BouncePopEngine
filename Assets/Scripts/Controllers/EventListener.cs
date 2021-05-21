@@ -4,27 +4,17 @@ using TigerForge;
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using DigitalRubyShared;
+using TigerForge.EasyEventManager;
 
 public class EventListener : MonoBehaviour
 {
     [SerializeField] MMFeedbacks _gameFeelSequence;
+    [SerializeField] EasyEvent _OnTap;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        EventManager.StartListening("OnPrint", PrintTest);
-    }
-
-    private void OnDestroy()
-    {
-        EventManager.StopListening("OnPrint", PrintTest);
-    }
-
-    
     Canvas canvas;
     PanGestureRecognizer letterMoveGesture;
 
-    private void OnEnable()
+    void OnEnable()
     {
         canvas = GetComponentInChildren<Canvas>();
         letterMoveGesture = new PanGestureRecognizer();
@@ -33,24 +23,24 @@ public class EventListener : MonoBehaviour
         FingersScript.Instance.AddGesture(letterMoveGesture);
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         if (FingersScript.HasInstance)
         {
             FingersScript.Instance.RemoveGesture(letterMoveGesture);
         }
     }
-    
 
-    private void Update()
+
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            EventManager.EmitEvent("OnPrint");
+            _OnTap.Invoke();
         }
     }
 
-    void PrintTest()
+    public void PrintTest()
     {
         _gameFeelSequence.PlayFeedbacks();
     }
