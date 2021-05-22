@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Object = System.Object;
 
 namespace TigerForge.EasyEventManager
 {
@@ -7,10 +8,12 @@ namespace TigerForge.EasyEventManager
     public class EasyEvent : ScriptableObject
     {
         [SerializeField] int _id;
+        public int ID => _id;
         public string Event => name;
 
-        public void Invoke()
+        public void Invoke(int id)
         {
+            _id = id;
             EventManager.EmitEvent(name);
         }
     }

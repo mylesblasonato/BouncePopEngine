@@ -7,10 +7,11 @@ namespace TigerForge.EasyEventManager
     {
         [SerializeField] EasyEvent _easyEvent;
         [SerializeField] UnityEvent _easyEventCallback;
+        [SerializeField] int _senderId;
 
         void Awake()
         {
-            EventManager.StartListening(_easyEvent.Event, Invoke, this.gameObject.name);
+            EventManager.StartListening(_easyEvent.Event, Invoke);
         }
 
         void OnDestroy()
@@ -20,7 +21,8 @@ namespace TigerForge.EasyEventManager
 
         void Invoke()
         {
-            _easyEventCallback?.Invoke();
+            if(_easyEvent.ID == _senderId)
+                _easyEventCallback?.Invoke();
         }
     }
 }

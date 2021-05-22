@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54dce2737f4b6f44da09a068a681ec09, type: 3}
-  m_Name: OnTap
+  m_Name: OnDrag
   m_EditorClassIdentifier: 
   _id: 0
