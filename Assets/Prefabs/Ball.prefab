@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 520629506396364622}
   - component: {fileID: 520629506396364627}
   - component: {fileID: 520629506396364626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,13 +91,12 @@ GameObject:
   m_Component:
   - component: {fileID: 520629506982245480}
   - component: {fileID: 520629506982245479}
-  - component: {fileID: 8702077011994548909}
   - component: {fileID: 520629506982245482}
   - component: {fileID: 520629506982245481}
   - component: {fileID: 520629506982245485}
   - component: {fileID: 855038247}
   - component: {fileID: 3939045778874264100}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -131,27 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441bc776817aa374b8527d7048e25dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameFeelSequence: {fileID: 520629506982245482}
-  _force: 100
-  _tag: Ball
-  _distance: 0
---- !u!114 &8702077011994548909
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 520629506982245478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cdcd46eed28e784496448ecf74677d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SwipeParticleSystem: {fileID: 0}
   SwipeTouchCount: 1
   SwipeMode: 0
   SwipeThresholdSeconds: 0
   Image: {fileID: 0}
+  flickForce: 10
 --- !u!114 &520629506982245482
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -31,9 +31,9 @@ namespace DigitalRubyShared
         [Tooltip("Non-asteroids")]
         public GameObject[] OtherObjects;
 
-        private TapGestureRecognizer[] TapGestures;
+        protected TapGestureRecognizer[] TapGestures;
 
-        private void CreateGesture(ref int index, GameObject obj)
+        void CreateGesture(ref int index, GameObject obj)
         {
             TapGestures[index] = new TapGestureRecognizer
             {
@@ -44,7 +44,7 @@ namespace DigitalRubyShared
             index++;
         }
 
-        private void Start()
+        void Start()
         {
             TapGestures = new TapGestureRecognizer[Asteroids.Length + OtherObjects.Length];
             int index = 0;
@@ -58,7 +58,7 @@ namespace DigitalRubyShared
             }
         }
 
-        private void TapGestureUpdated(DigitalRubyShared.GestureRecognizer gesture)
+        void TapGestureUpdated(DigitalRubyShared.GestureRecognizer gesture)
         {
             if (gesture.State == GestureRecognizerState.Ended)
             {
