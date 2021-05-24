@@ -413,6 +413,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 855038248}
+  - {fileID: 817356107}
   m_Father: {fileID: 168237899}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -704,6 +705,72 @@ Transform:
   m_Father: {fileID: 239060009}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!1001 &817356106
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 210774416}
+    m_Modifications:
+    - target: {fileID: 520629506982245478, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_Name
+      value: Ball (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245479, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: _swipeController
+      value: 
+      objectReference: {fileID: 1533700125}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.000007390976
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+--- !u!4 &817356107 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+  m_PrefabInstance: {fileID: 817356106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &836138603
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,6 +1469,7 @@ GameObject:
   - component: {fileID: 1533700124}
   - component: {fileID: 1533700123}
   - component: {fileID: 1533700125}
+  - component: {fileID: 1533700126}
   m_Layer: 0
   m_Name: FingerManager
   m_TagString: Untagged
@@ -1464,12 +1532,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cdcd46eed28e784496448ecf74677d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _match3Controller: {fileID: 1533700126}
   _ballMask:
     serializedVersion: 2
     m_Bits: 256
   SwipeTouchCount: 1
   SwipeMode: 0
   SwipeThresholdSeconds: 0
+--- !u!114 &1533700126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533700122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4410a069ea62a54b84c2b1c8dc81fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _swipeController: {fileID: 1533700125}
 --- !u!1 &1535470707
 GameObject:
   m_ObjectHideFlags: 0
@@ -2072,6 +2154,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 520629506982245479, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
+      propertyPath: _swipeController
+      value: 
+      objectReference: {fileID: 1533700125}
     - target: {fileID: 520629506982245480, guid: a5e470402e22d4f48a7009a8c52b54ef, type: 3}
       propertyPath: m_RootOrder
       value: 0
