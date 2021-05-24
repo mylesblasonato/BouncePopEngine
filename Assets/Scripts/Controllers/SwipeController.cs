@@ -8,6 +8,7 @@ public class SwipeController : MonoBehaviour
 {
     [SerializeField] Match3Controller _match3Controller;
     [SerializeField] LayerMask _ballMask;
+    [SerializeField] float _swipeLength = 10f;
     public int SwipeTouchCount = 1;
     public SwipeGestureRecognizerEndMode SwipeMode = SwipeGestureRecognizerEndMode.EndImmediately;
     [Range(0.0f, 10.0f)] public float SwipeThresholdSeconds;
@@ -41,7 +42,7 @@ public class SwipeController : MonoBehaviour
         _cam = Camera.main;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         swipe.MinimumNumberOfTouchesToTrack = swipe.MaximumNumberOfTouchesToTrack = SwipeTouchCount;
         swipe.EndMode = SwipeMode;
@@ -49,7 +50,7 @@ public class SwipeController : MonoBehaviour
         if(raycast && !_match3Controller._isFlicking)
         {
             RaycastHit2D[] swipeHit = Physics2D.RaycastAll(
-                _startPos, _endPos - _startPos, 200f, _ballMask);
+                _startPos, _endPos - _startPos, _swipeLength, _ballMask);
             if (swipeHit.Length > 1)
             {
                 foreach (var hit in swipeHit)

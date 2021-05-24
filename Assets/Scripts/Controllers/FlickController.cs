@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DigitalRubyShared;
-using Ludiq.PeekCore;
 
 public class FlickController : MonoBehaviour
 {
@@ -47,6 +46,8 @@ public class FlickController : MonoBehaviour
         if (gesture.State == GestureRecognizerState.Began)
         {
             _ball = FingersUtilityExtensions.GetTouchedObject(gesture);
+            if(_ball.CompareTag("Ball"))
+                _ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             if (_ball.GetComponent<BallController>() == null) return;
             _match3Controller._isFlicking = true;
         }
@@ -64,7 +65,7 @@ public class FlickController : MonoBehaviour
         {
             if (_ball.GetComponent<BallController>() == null) return;
             var rb = _ball.GetComponent<Rigidbody2D>();
-            if(rb != null) rb.AddForce(new Vector2(swipe.DeltaX.Normalized(), swipe.DeltaY.Normalized()) * gesture.Speed * flickForce * Time.deltaTime);
+            if(rb != null) rb.AddForce(new Vector2(swipe.DeltaX, swipe.DeltaY) * gesture.Speed * flickForce * Time.deltaTime);
             _ball = null;           
         }
     }

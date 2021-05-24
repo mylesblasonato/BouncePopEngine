@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] SOFloat _currentLevelIndex;
+    [SerializeField] GameObject _menuScreen;
+    [SerializeField] GameObject _winScreen;
     public List<GameObject> _levels;
     static LevelManager _instance;
     public static LevelManager Instance => _instance;
@@ -25,6 +27,12 @@ public class LevelManager : MonoBehaviour
 
         _currentLevel = _levels[(int)_currentLevelIndex.Value];
         _currentLevel.SetActive(true);
+
+        if (_currentLevelIndex.Value >= 0)
+        {
+            _menuScreen.SetActive(false);
+        }
+        _winScreen.SetActive(false);
     }
 
     public void LoadLevel(string levelName)
@@ -33,16 +41,38 @@ public class LevelManager : MonoBehaviour
         {
             if (String.CompareOrdinal(level.name, levelName) == 0)
             {
-                _currentLevel.SetActive(false);
-                _currentLevel = level;
-                _currentLevel.SetActive(true);
-                _currentLevelIndex.Value += 1f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                _winScreen.SetActive(true);
+                _level = level;
+                Invoke("LevelProcessor", 3f);
                 break;
             }
         }
     }
 
+    GameObject _level;
+    void LevelProcessor()
+    {
+        if ((int)_currentLevelIndex.Value < _levels.Count - 1)
+        {
+            _currentLevel.SetActive(false);
+            _currentLevel = _level;
+            _currentLevel.SetActive(true);
+            _currentLevelIndex.Value += 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        else
+        {
+            _menuScreen.SetActive(true);
+            _winScreen.SetActive(false);
+        }
+    }
+
+    public void RestartGame()
+    {
+        _currentLevelIndex.Value = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
     public void OpenUI(GameObject go)
     {
         go.SetActive(true);

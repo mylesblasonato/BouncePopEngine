@@ -14,7 +14,7 @@ public class Match3Controller : MonoBehaviour
 
     public bool _isFlicking = false;
 
-    void Start()
+    void Awake()
     {
         _matches = new List<GameObject>();
         _level = GetComponent<Level>();
@@ -41,14 +41,12 @@ public class Match3Controller : MonoBehaviour
             {
                 match.GetComponent<MMFeedbacks>().PlayFeedbacks();
             }
-            Debug.Log("MATCH");
             ClearLists(elements);
             _level.CheckMatchesLeft();
             _level = LevelManager.Instance._currentLevel.GetComponent<Level>();
         }
         else
         {
-            Debug.Log("NO MATCH");
             ClearLists(elements);
             return;
         }
