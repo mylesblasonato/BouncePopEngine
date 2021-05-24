@@ -46,7 +46,7 @@ public class SwipeController : MonoBehaviour
         swipe.MinimumNumberOfTouchesToTrack = swipe.MaximumNumberOfTouchesToTrack = SwipeTouchCount;
         swipe.EndMode = SwipeMode;
 
-        if(raycast)
+        if(raycast && !_match3Controller._isFlicking)
         {
             RaycastHit2D[] swipeHit = Physics2D.RaycastAll(
                 _startPos, _endPos - _startPos, 200f, _ballMask);
@@ -89,24 +89,3 @@ public class SwipeController : MonoBehaviour
         Gizmos.DrawLine(_startPos, _endPos);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

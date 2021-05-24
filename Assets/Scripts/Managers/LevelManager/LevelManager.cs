@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField] SOFloat _currentLevelIndex;
     public List<GameObject> _levels;
     static LevelManager _instance;
-    public static LevelManager Instance = _instance;
+    public static LevelManager Instance => _instance;
 
     public GameObject _currentLevel;
 
@@ -21,7 +23,7 @@ public class LevelManager : MonoBehaviour
             _levels.Add(child.gameObject);
         }
 
-        _currentLevel = _levels[0];
+        _currentLevel = _levels[(int)_currentLevelIndex.Value];
         _currentLevel.SetActive(true);
     }
 
@@ -34,6 +36,8 @@ public class LevelManager : MonoBehaviour
                 _currentLevel.SetActive(false);
                 _currentLevel = level;
                 _currentLevel.SetActive(true);
+                _currentLevelIndex.Value += 1f;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 break;
             }
         }

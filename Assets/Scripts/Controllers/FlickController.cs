@@ -7,6 +7,7 @@ using Ludiq.PeekCore;
 
 public class FlickController : MonoBehaviour
 {
+    [SerializeField] Match3Controller _match3Controller;
     [SerializeField] SwipeController _swipeController;
     public int SwipeTouchCount = 1;
     public SwipeGestureRecognizerEndMode SwipeMode = SwipeGestureRecognizerEndMode.EndImmediately;
@@ -47,7 +48,12 @@ public class FlickController : MonoBehaviour
         {
             _ball = FingersUtilityExtensions.GetTouchedObject(gesture);
             if (_ball.GetComponent<BallController>() == null) return;
-            _swipeController.enabled = false;
+            _match3Controller._isFlicking = true;
+        }
+
+        if(gesture.State == GestureRecognizerState.Ended)
+        {
+            _match3Controller._isFlicking = false;
         }
     }
 
@@ -56,11 +62,10 @@ public class FlickController : MonoBehaviour
         SwipeGestureRecognizer swipe = gesture as SwipeGestureRecognizer;
         if (swipe.State == GestureRecognizerState.Ended)
         {
-            if (_ball == null) return;
+            if (_ball.GetComponent<BallController>() == null) return;
             var rb = _ball.GetComponent<Rigidbody2D>();
             if(rb != null) rb.AddForce(new Vector2(swipe.DeltaX.Normalized(), swipe.DeltaY.Normalized()) * gesture.Speed * flickForce * Time.deltaTime);
-            _ball = null;
-            _swipeController.enabled = true;
+            _ball = null;           
         }
     }
 }

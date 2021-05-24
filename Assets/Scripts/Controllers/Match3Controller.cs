@@ -1,18 +1,23 @@
-﻿using System.Collections;
+﻿using MoreMountains.Feedbacks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Match3Controller : MonoBehaviour
-{
+{   
     [SerializeField] SwipeController _swipeController;
+    Level _level;
     GameObject _currentMatchToCheck;
     List<GameObject> _matches;
-
+    MMFeedback _feedback;
     int _matchCount = 0;
 
-    void Awake()
+    public bool _isFlicking = false;
+
+    void Start()
     {
         _matches = new List<GameObject>();
+        _level = GetComponent<Level>();
     }
     public void CheckMatch(List<GameObject> elements)
     {
@@ -26,18 +31,7 @@ public class Match3Controller : MonoBehaviour
                 {
                     _matches.Add(ball);
                     _matchCount++;
-                }
-                else
-                {
-                    foreach (var match in _matches)
-                    {
-                        var m = match;
-                        m.SetActive(false);
-                        _matches.Remove(match);
-                    }
-                    Debug.Log("MATCH");
-                    return;
-                }    
+                }                  
             }
         }
 
@@ -45,11 +39,27 @@ public class Match3Controller : MonoBehaviour
         {
             foreach (var match in _matches)
             {
-                var m = match;
-                m.SetActive(false);
-                _matches.Remove(match);
+                match.GetComponent<MMFeedbacks>().PlayFeedbacks();
             }
             Debug.Log("MATCH");
+            ClearLists(elements);
+            _level.CheckMatchesLeft();
+            _level = LevelManager.Instance._currentLevel.GetComponent<Level>();
         }
+        else
+        {
+            Debug.Log("NO MATCH");
+            ClearLists(elements);
+            return;
+        }
+    }
+
+    void ClearLists(List<GameObject> elements)
+    {
+        _matches.RemoveAll(v => v.GetComponent<BallController>() != null);
+        elements.RemoveAll(e => e.GetComponent<BallController>() != null);
+        _level._ballsLeft -= _matchCount;
+        _matchCount = 0;
+        _currentMatchToCheck = null;       
     }
 }
