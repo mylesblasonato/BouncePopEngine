@@ -6,6 +6,7 @@ using UnityEngine;
 public class Match3Controller : MonoBehaviour
 {   
     [SerializeField] SwipeController _swipeController;
+    [SerializeField] AudioClip _matchSfx;
     Level _level;
     GameObject _currentMatchToCheck;
     List<GameObject> _matches;
@@ -40,10 +41,12 @@ public class Match3Controller : MonoBehaviour
             foreach (var match in _matches)
             {
                 match.GetComponent<MMFeedbacks>().PlayFeedbacks();
+                MundoSound.Play(_matchSfx, 1f);
             }
+            _level = LevelManager.Instance._currentLevel.GetComponent<Level>();
+            _level._ballsLeft -= _matchCount;
             ClearLists(elements);
             _level.CheckMatchesLeft();
-            _level = LevelManager.Instance._currentLevel.GetComponent<Level>();
         }
         else
         {
@@ -56,7 +59,6 @@ public class Match3Controller : MonoBehaviour
     {
         _matches.RemoveAll(v => v.GetComponent<BallController>() != null);
         elements.RemoveAll(e => e.GetComponent<BallController>() != null);
-        _level._ballsLeft -= _matchCount;
         _matchCount = 0;
         _currentMatchToCheck = null;       
     }

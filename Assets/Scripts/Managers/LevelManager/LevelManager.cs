@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] SOFloat _currentLevelIndex;
-    [SerializeField] GameObject _menuScreen;
-    [SerializeField] GameObject _winScreen;
+    public GameObject _menuScreen;
+    public GameObject _winScreen;
     public List<GameObject> _levels;
     static LevelManager _instance;
     public static LevelManager Instance => _instance;
@@ -70,6 +70,11 @@ public class LevelManager : MonoBehaviour
     public void RestartGame()
     {
         _currentLevelIndex.Value = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
+    public void ReloadLevel()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     

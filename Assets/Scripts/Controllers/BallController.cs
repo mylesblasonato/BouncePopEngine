@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,9 +17,10 @@ public class BallController : MonoBehaviour
 {
     [SerializeField] BallType _ballType;
     [SerializeField] MeshRenderer _meshRenderer;
+    [SerializeField] AudioClip _ballKnockSfx;
     public BallType TypeOfBall => _ballType;
 
-    private void Update()
+    void Update()
     {
         _meshRenderer.material = Instantiate(Resources.Load("Ball") as Material);
 
@@ -40,5 +42,10 @@ public class BallController : MonoBehaviour
                 _meshRenderer.sharedMaterial.color = Color.black;
                 break;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        MundoSound.Play(_ballKnockSfx);
     }
 }

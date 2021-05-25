@@ -1413,7 +1413,7 @@ namespace DigitalRubyShared
         /// <summary>
         /// Change in focus y in pixels
         /// </summary>
-        /// <value>The change in y</value>
+        /// <value>The change in y</value>FocusX
         public float DeltaY { get; private set; }
 
         /// <summary>

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DigitalRubyShared;
+using MoreMountains.Feedbacks;
 
 public class SwipeController : MonoBehaviour
 {
+    [SerializeField] Transform _swipeVfx;
+    [SerializeField] MMFeedbacks _feedbacks;
     [SerializeField] Match3Controller _match3Controller;
     [SerializeField] LayerMask _ballMask;
     [SerializeField] float _swipeLength = 10f;
@@ -29,6 +32,8 @@ public class SwipeController : MonoBehaviour
         swipe = new SwipeGestureRecognizer();
         swipe.StateUpdated += Swipe_Updated;
         swipe.DirectionThreshold = 0;
+        swipe.MinimumSpeedUnits = 1f;
+        swipe.MinimumDistanceUnits = 1f;
         swipe.MinimumNumberOfTouchesToTrack = swipe.MaximumNumberOfTouchesToTrack = SwipeTouchCount;
         swipe.ThresholdSeconds = SwipeThresholdSeconds;
         FingersScript.Instance.AddGesture(swipe);
@@ -42,12 +47,24 @@ public class SwipeController : MonoBehaviour
         _cam = Camera.main;
     }
 
-    void FixedUpdate()
-    {
+    void Update()
+    {/*
+        if (Input.GetMouseButton(0))
+        {
+            _swipeVfx.gameObject.SetActive(true);
+            _swipeVfx.transform.position = new Vector3(_cam.ScreenToWorldPoint(Input.mousePosition).x,
+                _cam.ScreenToWorldPoint(Input.mousePosition).y, 0f);
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            _swipeVfx.gameObject.SetActive(false);
+        }
+
         swipe.MinimumNumberOfTouchesToTrack = swipe.MaximumNumberOfTouchesToTrack = SwipeTouchCount;
         swipe.EndMode = SwipeMode;
 
-        if(raycast && !_match3Controller._isFlicking)
+        if (raycast && !_match3Controller._isFlicking)
         {
             RaycastHit2D[] swipeHit = Physics2D.RaycastAll(
                 _startPos, _endPos - _startPos, _swipeLength, _ballMask);
@@ -57,34 +74,47 @@ public class SwipeController : MonoBehaviour
                 {
                     _balls.Add(hit.collider.gameObject);
                 }
+
                 _startPos = Vector2.zero;
                 _endPos = Vector2.zero;
-                _match3Controller.CheckMatch(_balls);               
+                _match3Controller.CheckMatch(_balls);
             }
+
+            LevelManager.Instance._currentLevel.GetComponent<Level>()._turnsRemaining--;
+            LevelManager.Instance._currentLevel.GetComponent<Level>().CheckTurnsLeft();
             raycast = false;
         }
+        */
     }
 
     Camera _cam;
+
     void Tap_Updated(GestureRecognizer gesture)
-    {
+    {/*
         if (gesture.State == GestureRecognizerState.Began)
         {
-            _startPos = _cam.ScreenToWorldPoint(Input.mousePosition);
-        }
+            _startPos = Vector2.zero;
+            _endPos = Vector2.zero;
+            _startPos = _cam.ScreenToWorldPoint(new Vector2(gesture.FocusX, gesture.FocusY));
+        }*/
     }
-    
+
     void Swipe_Updated(GestureRecognizer gesture)
     {
-        SwipeGestureRecognizer swipe = gesture as SwipeGestureRecognizer;
+       /* SwipeGestureRecognizer swipe = gesture as SwipeGestureRecognizer;
         if (swipe.State == GestureRecognizerState.Ended)
         {
-            _endPos = _cam.ScreenToWorldPoint(Input.mousePosition);
+            _endPos = _cam.ScreenToWorldPoint(new Vector2(gesture.FocusX, gesture.FocusY));
             raycast = true;
         }
+        else if (swipe.State == GestureRecognizerState.Executing)
+        {
+            _feedbacks.PlayFeedbacks();
+        }*/
     }
 
     bool raycast = false;
+
     void OnDrawGizmos()
     {
         Gizmos.DrawLine(_startPos, _endPos);
