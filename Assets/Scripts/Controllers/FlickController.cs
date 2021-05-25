@@ -82,8 +82,6 @@ public class FlickController : MonoBehaviour
     {
         if (other.collider.CompareTag("Ball"))
         {
-            _ball.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            other.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             _balls.Add(other.gameObject);
             _balls.Add(gameObject);
             _match3Controller.CheckMatch(_balls);
